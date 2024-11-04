@@ -18,17 +18,17 @@ namespace Trabalho_POO
 
         private void HideSideBar()
         {
-            sideBar.Visible = false;
-            btSideBar.Visible = false;
+            //sideBar.Visible = false;
+            //btSideBar.Visible = false;
 
-            if (login == null)
-            {
-                login = new Login();
-                login.FormClosed += Login_FormClosed;
-                login.MdiParent = this;
-                login.Dock = DockStyle.Fill;
-                login.Show();
-            }
+            //if (login == null)
+            //{
+            //    login = new Login();
+            //    login.FormClosed += Login_FormClosed;
+            //    login.MdiParent = this;
+            //    login.Dock = DockStyle.Fill;
+            //    login.Show();
+            //}
         }
 
         private void Login_FormClosed(object? sender, FormClosedEventArgs e)
