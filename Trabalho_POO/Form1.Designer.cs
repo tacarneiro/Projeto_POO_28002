@@ -32,29 +32,30 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             nightControlBox1 = new ReaLTaiizor.Controls.NightControlBox();
             label1 = new Label();
-            pictureBox1 = new PictureBox();
+            btSideBar = new PictureBox();
             panel2 = new Panel();
-            flowLayoutPanel1 = new FlowLayoutPanel();
+            sideBar = new FlowLayoutPanel();
+            menuContainer = new FlowLayoutPanel();
             panel1 = new Panel();
-            button1 = new Button();
+            btManage = new Button();
             panel3 = new Panel();
-            button2 = new Button();
-            flowLayoutPanel2 = new FlowLayoutPanel();
+            btReservations = new Button();
             panel5 = new Panel();
-            button4 = new Button();
+            btClients = new Button();
             panel4 = new Panel();
-            button3 = new Button();
+            btSettings = new Button();
             panel6 = new Panel();
-            button5 = new Button();
+            btLogOut = new Button();
             panel7 = new Panel();
-            button6 = new Button();
+            btAbout = new Button();
             menuTransition = new System.Windows.Forms.Timer(components);
             sideBarTransition = new System.Windows.Forms.Timer(components);
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)btSideBar).BeginInit();
             panel2.SuspendLayout();
+            sideBar.SuspendLayout();
+            menuContainer.SuspendLayout();
             panel1.SuspendLayout();
             panel3.SuspendLayout();
-            flowLayoutPanel2.SuspendLayout();
             panel5.SuspendLayout();
             panel4.SuspendLayout();
             panel6.SuspendLayout();
@@ -71,11 +72,11 @@
             nightControlBox1.DisableMaximizeColor = Color.Black;
             nightControlBox1.DisableMinimizeColor = Color.Black;
             nightControlBox1.EnableCloseColor = Color.Black;
-            nightControlBox1.EnableMaximizeButton = true;
+            nightControlBox1.EnableMaximizeButton = false;
             nightControlBox1.EnableMaximizeColor = Color.Black;
             nightControlBox1.EnableMinimizeButton = true;
             nightControlBox1.EnableMinimizeColor = Color.Black;
-            nightControlBox1.Location = new Point(1083, 11);
+            nightControlBox1.Location = new Point(1093, 0);
             nightControlBox1.MaximizeHoverColor = Color.FromArgb(15, 255, 255, 255);
             nightControlBox1.MaximizeHoverForeColor = Color.White;
             nightControlBox1.MinimizeHoverColor = Color.FromArgb(15, 255, 255, 255);
@@ -95,200 +96,229 @@
             label1.TabIndex = 2;
             label1.Text = "Gestão Alojamento Turístico";
             // 
-            // pictureBox1
+            // btSideBar
             // 
-            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(3, 5);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(58, 40);
-            pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
-            pictureBox1.TabIndex = 1;
-            pictureBox1.TabStop = false;
+            btSideBar.Image = (Image)resources.GetObject("btSideBar.Image");
+            btSideBar.Location = new Point(3, 5);
+            btSideBar.Name = "btSideBar";
+            btSideBar.Size = new Size(58, 40);
+            btSideBar.SizeMode = PictureBoxSizeMode.CenterImage;
+            btSideBar.TabIndex = 1;
+            btSideBar.TabStop = false;
+            btSideBar.Click += btSideBar_Click;
             // 
             // panel2
             // 
             panel2.BackColor = Color.FromArgb(40, 196, 220);
             panel2.Controls.Add(label1);
             panel2.Controls.Add(nightControlBox1);
-            panel2.Controls.Add(pictureBox1);
+            panel2.Controls.Add(btSideBar);
             panel2.Dock = DockStyle.Top;
+            panel2.ForeColor = Color.Transparent;
             panel2.Location = new Point(0, 0);
             panel2.Name = "panel2";
             panel2.Size = new Size(1232, 50);
             panel2.TabIndex = 4;
             // 
-            // flowLayoutPanel1
+            // sideBar
             // 
-            flowLayoutPanel1.BackColor = Color.FromArgb(40, 196, 220);
-            flowLayoutPanel1.Dock = DockStyle.Left;
-            flowLayoutPanel1.Location = new Point(0, 50);
-            flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(211, 673);
-            flowLayoutPanel1.TabIndex = 3;
+            sideBar.BackColor = Color.FromArgb(40, 196, 220);
+            sideBar.Controls.Add(menuContainer);
+            sideBar.Controls.Add(panel4);
+            sideBar.Controls.Add(panel6);
+            sideBar.Controls.Add(panel7);
+            sideBar.Dock = DockStyle.Left;
+            sideBar.Location = new Point(0, 50);
+            sideBar.Name = "sideBar";
+            sideBar.Size = new Size(75, 673);
+            sideBar.TabIndex = 3;
+            // 
+            // menuContainer
+            // 
+            menuContainer.BackColor = Color.FromArgb(40, 196, 220);
+            menuContainer.Controls.Add(panel1);
+            menuContainer.Controls.Add(panel3);
+            menuContainer.Controls.Add(panel5);
+            menuContainer.Location = new Point(3, 3);
+            menuContainer.Name = "menuContainer";
+            menuContainer.Size = new Size(233, 48);
+            menuContainer.TabIndex = 7;
             // 
             // panel1
             // 
             panel1.BackColor = Color.FromArgb(40, 196, 220);
-            panel1.Controls.Add(button1);
+            panel1.Controls.Add(btManage);
             panel1.Location = new Point(3, 3);
             panel1.Name = "panel1";
             panel1.Size = new Size(233, 60);
             panel1.TabIndex = 5;
             // 
-            // button1
+            // btManage
             // 
-            button1.BackColor = Color.FromArgb(40, 196, 220);
-            button1.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            button1.ForeColor = Color.White;
-            button1.Location = new Point(-5, -7);
-            button1.Name = "button1";
-            button1.Size = new Size(248, 74);
-            button1.TabIndex = 6;
-            button1.Text = "Menu";
-            button1.UseVisualStyleBackColor = false;
+            btManage.BackColor = Color.FromArgb(40, 196, 220);
+            btManage.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btManage.ForeColor = Color.White;
+            btManage.Image = (Image)resources.GetObject("btManage.Image");
+            btManage.ImageAlign = ContentAlignment.MiddleLeft;
+            btManage.Location = new Point(-10, -9);
+            btManage.Name = "btManage";
+            btManage.Padding = new Padding(30, 0, 45, 0);
+            btManage.Size = new Size(245, 73);
+            btManage.TabIndex = 6;
+            btManage.Text = "    Gerir";
+            btManage.UseVisualStyleBackColor = false;
+            btManage.Click += btManage_Click;
             // 
             // panel3
             // 
             panel3.BackColor = Color.FromArgb(40, 196, 220);
-            panel3.Controls.Add(button2);
+            panel3.Controls.Add(btReservations);
             panel3.Location = new Point(3, 69);
             panel3.Name = "panel3";
             panel3.Size = new Size(233, 60);
             panel3.TabIndex = 6;
             // 
-            // button2
+            // btReservations
             // 
-            button2.BackColor = Color.FromArgb(40, 196, 220);
-            button2.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            button2.ForeColor = Color.White;
-            button2.Location = new Point(-5, -7);
-            button2.Name = "button2";
-            button2.Size = new Size(248, 74);
-            button2.TabIndex = 6;
-            button2.Text = "Reservas";
-            button2.UseVisualStyleBackColor = false;
-            // 
-            // flowLayoutPanel2
-            // 
-            flowLayoutPanel2.BackColor = Color.FromArgb(40, 196, 220);
-            flowLayoutPanel2.Controls.Add(panel1);
-            flowLayoutPanel2.Controls.Add(panel3);
-            flowLayoutPanel2.Controls.Add(panel5);
-            flowLayoutPanel2.Location = new Point(545, 138);
-            flowLayoutPanel2.Name = "flowLayoutPanel2";
-            flowLayoutPanel2.Size = new Size(233, 228);
-            flowLayoutPanel2.TabIndex = 7;
+            btReservations.BackColor = Color.FromArgb(40, 196, 220);
+            btReservations.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btReservations.ForeColor = Color.White;
+            btReservations.Image = (Image)resources.GetObject("btReservations.Image");
+            btReservations.ImageAlign = ContentAlignment.MiddleLeft;
+            btReservations.Location = new Point(-5, -7);
+            btReservations.Name = "btReservations";
+            btReservations.Padding = new Padding(50, 0, 45, 0);
+            btReservations.Size = new Size(248, 79);
+            btReservations.TabIndex = 6;
+            btReservations.Text = "Reservas";
+            btReservations.UseVisualStyleBackColor = false;
+            btReservations.Click += btReservations_Click_1;
             // 
             // panel5
             // 
             panel5.BackColor = Color.FromArgb(40, 196, 220);
-            panel5.Controls.Add(button4);
+            panel5.Controls.Add(btClients);
             panel5.Location = new Point(3, 135);
             panel5.Name = "panel5";
             panel5.Size = new Size(233, 60);
             panel5.TabIndex = 8;
             // 
-            // button4
+            // btClients
             // 
-            button4.BackColor = Color.FromArgb(40, 196, 220);
-            button4.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            button4.ForeColor = Color.White;
-            button4.Location = new Point(-5, -7);
-            button4.Name = "button4";
-            button4.Size = new Size(248, 74);
-            button4.TabIndex = 6;
-            button4.Text = "Clientes";
-            button4.UseVisualStyleBackColor = false;
+            btClients.BackColor = Color.FromArgb(40, 196, 220);
+            btClients.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btClients.ForeColor = Color.White;
+            btClients.Image = (Image)resources.GetObject("btClients.Image");
+            btClients.ImageAlign = ContentAlignment.MiddleLeft;
+            btClients.Location = new Point(-5, -7);
+            btClients.Name = "btClients";
+            btClients.Padding = new Padding(50, 0, 45, 0);
+            btClients.Size = new Size(248, 74);
+            btClients.TabIndex = 6;
+            btClients.Text = "Clientes";
+            btClients.UseVisualStyleBackColor = false;
+            btClients.Click += btClients_Click_1;
             // 
             // panel4
             // 
             panel4.BackColor = Color.FromArgb(40, 196, 220);
-            panel4.Controls.Add(button3);
-            panel4.Location = new Point(546, 374);
+            panel4.Controls.Add(btSettings);
+            panel4.Location = new Point(3, 57);
             panel4.Name = "panel4";
             panel4.Size = new Size(233, 48);
             panel4.TabIndex = 9;
             // 
-            // button3
+            // btSettings
             // 
-            button3.BackColor = Color.FromArgb(40, 196, 220);
-            button3.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            button3.ForeColor = Color.White;
-            button3.Location = new Point(-5, -7);
-            button3.Name = "button3";
-            button3.Size = new Size(243, 64);
-            button3.TabIndex = 6;
-            button3.Text = "Definições";
-            button3.UseVisualStyleBackColor = false;
+            btSettings.BackColor = Color.FromArgb(40, 196, 220);
+            btSettings.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btSettings.ForeColor = Color.White;
+            btSettings.Image = (Image)resources.GetObject("btSettings.Image");
+            btSettings.ImageAlign = ContentAlignment.MiddleLeft;
+            btSettings.Location = new Point(-5, -7);
+            btSettings.Name = "btSettings";
+            btSettings.Padding = new Padding(30, 0, 45, 0);
+            btSettings.Size = new Size(243, 64);
+            btSettings.TabIndex = 6;
+            btSettings.Text = "    Definições";
+            btSettings.UseVisualStyleBackColor = false;
             // 
             // panel6
             // 
             panel6.BackColor = Color.FromArgb(40, 196, 220);
-            panel6.Controls.Add(button5);
-            panel6.Location = new Point(546, 485);
+            panel6.Controls.Add(btLogOut);
+            panel6.Location = new Point(3, 111);
             panel6.Name = "panel6";
             panel6.Size = new Size(233, 48);
             panel6.TabIndex = 10;
             // 
-            // button5
+            // btLogOut
             // 
-            button5.BackColor = Color.FromArgb(40, 196, 220);
-            button5.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            button5.ForeColor = Color.White;
-            button5.Location = new Point(-5, -7);
-            button5.Name = "button5";
-            button5.Size = new Size(243, 64);
-            button5.TabIndex = 6;
-            button5.Text = "Sair";
-            button5.UseVisualStyleBackColor = false;
+            btLogOut.BackColor = Color.FromArgb(40, 196, 220);
+            btLogOut.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btLogOut.ForeColor = Color.White;
+            btLogOut.Image = (Image)resources.GetObject("btLogOut.Image");
+            btLogOut.ImageAlign = ContentAlignment.MiddleLeft;
+            btLogOut.Location = new Point(-5, -7);
+            btLogOut.Name = "btLogOut";
+            btLogOut.Padding = new Padding(30, 0, 45, 0);
+            btLogOut.Size = new Size(243, 64);
+            btLogOut.TabIndex = 6;
+            btLogOut.Text = "    Sair";
+            btLogOut.UseVisualStyleBackColor = false;
             // 
             // panel7
             // 
             panel7.BackColor = Color.FromArgb(40, 196, 220);
-            panel7.Controls.Add(button6);
-            panel7.Location = new Point(546, 431);
+            panel7.Controls.Add(btAbout);
+            panel7.Location = new Point(3, 165);
             panel7.Name = "panel7";
             panel7.Size = new Size(233, 48);
             panel7.TabIndex = 11;
             // 
-            // button6
+            // btAbout
             // 
-            button6.BackColor = Color.FromArgb(40, 196, 220);
-            button6.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            button6.ForeColor = Color.White;
-            button6.Location = new Point(-5, -7);
-            button6.Name = "button6";
-            button6.Size = new Size(243, 64);
-            button6.TabIndex = 6;
-            button6.Text = "Sobre";
-            button6.UseVisualStyleBackColor = false;
+            btAbout.BackColor = Color.FromArgb(40, 196, 220);
+            btAbout.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btAbout.ForeColor = Color.White;
+            btAbout.Image = (Image)resources.GetObject("btAbout.Image");
+            btAbout.ImageAlign = ContentAlignment.MiddleLeft;
+            btAbout.Location = new Point(-5, -7);
+            btAbout.Name = "btAbout";
+            btAbout.Padding = new Padding(30, 0, 45, 0);
+            btAbout.Size = new Size(243, 64);
+            btAbout.TabIndex = 6;
+            btAbout.Text = "    Sobre";
+            btAbout.UseVisualStyleBackColor = false;
             // 
             // menuTransition
             // 
             menuTransition.Tick += menuTransition_Tick;
+            // 
+            // sideBarTransition
+            // 
+            sideBarTransition.Interval = 10;
+            sideBarTransition.Tick += sideBarTransition_Tick;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1232, 723);
-            Controls.Add(panel7);
-            Controls.Add(panel6);
-            Controls.Add(panel4);
-            Controls.Add(flowLayoutPanel2);
-            Controls.Add(flowLayoutPanel1);
+            Controls.Add(sideBar);
             Controls.Add(panel2);
             FormBorderStyle = FormBorderStyle.None;
             IsMdiContainer = true;
             Name = "Form1";
             Text = "Form1";
             Load += Form1_Load;
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)btSideBar).EndInit();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
+            sideBar.ResumeLayout(false);
+            menuContainer.ResumeLayout(false);
             panel1.ResumeLayout(false);
             panel3.ResumeLayout(false);
-            flowLayoutPanel2.ResumeLayout(false);
             panel5.ResumeLayout(false);
             panel4.ResumeLayout(false);
             panel6.ResumeLayout(false);
@@ -299,22 +329,22 @@
         #endregion
         private ReaLTaiizor.Controls.NightControlBox nightControlBox1;
         private Label label1;
-        private PictureBox pictureBox1;
+        private PictureBox btSideBar;
         private Panel panel2;
-        private FlowLayoutPanel flowLayoutPanel1;
+        private FlowLayoutPanel sideBar;
         private Panel panel1;
-        private Button button1;
+        private Button btManage;
         private Panel panel3;
-        private Button button2;
-        private FlowLayoutPanel flowLayoutPanel2;
+        private Button btReservations;
+        private FlowLayoutPanel menuContainer;
         private Panel panel4;
-        private Button button3;
+        private Button btSettings;
         private Panel panel5;
-        private Button button4;
+        private Button btClients;
         private Panel panel6;
-        private Button button5;
+        private Button btLogOut;
         private Panel panel7;
-        private Button button6;
+        private Button btAbout;
         private System.Windows.Forms.Timer menuTransition;
         private System.Windows.Forms.Timer sideBarTransition;
     }
