@@ -13,8 +13,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Dados\Dados.csproj" />
+    <ProjectReference Include="..\Excecoes\Excecoes.csproj" />
     <ProjectReference Include="..\Objects\Objects.csproj" />
-    <ProjectReference Include="..\teste\Login.csproj" />
     <ProjectReference Include="..\Tests\Tests.csproj" />
   </ItemGroup>
 
@@ -31,6 +32,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Bd\" />
   </ItemGroup>
 
 </Project>

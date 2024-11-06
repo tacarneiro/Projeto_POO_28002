@@ -1,6 +1,6 @@
 ﻿namespace Trabalho_POO
 {
-    partial class Form1
+    partial class Main
     {
         /// <summary>
         ///  Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             nightControlBox1 = new ReaLTaiizor.Controls.NightControlBox();
             label1 = new Label();
             btSideBar = new PictureBox();
@@ -124,9 +124,9 @@
             // 
             sideBar.BackColor = Color.FromArgb(40, 196, 220);
             sideBar.Controls.Add(menuContainer);
-            sideBar.Controls.Add(panel4);
-            sideBar.Controls.Add(panel6);
             sideBar.Controls.Add(panel7);
+            sideBar.Controls.Add(panel6);
+            sideBar.Controls.Add(panel4);
             sideBar.Dock = DockStyle.Left;
             sideBar.Location = new Point(0, 50);
             sideBar.Name = "sideBar";
@@ -165,7 +165,7 @@
             btManage.Padding = new Padding(30, 0, 45, 0);
             btManage.Size = new Size(245, 73);
             btManage.TabIndex = 6;
-            btManage.Text = "    Gerir";
+            btManage.Text = "    Manage";
             btManage.UseVisualStyleBackColor = false;
             btManage.Click += btManage_Click;
             // 
@@ -185,12 +185,12 @@
             btReservations.ForeColor = Color.White;
             btReservations.Image = (Image)resources.GetObject("btReservations.Image");
             btReservations.ImageAlign = ContentAlignment.MiddleLeft;
-            btReservations.Location = new Point(-5, -7);
+            btReservations.Location = new Point(-5, -13);
             btReservations.Name = "btReservations";
-            btReservations.Padding = new Padding(50, 0, 45, 0);
-            btReservations.Size = new Size(248, 79);
+            btReservations.Padding = new Padding(30, 0, 45, 0);
+            btReservations.Size = new Size(248, 83);
             btReservations.TabIndex = 6;
-            btReservations.Text = "Reservas";
+            btReservations.Text = "    Reservations";
             btReservations.UseVisualStyleBackColor = false;
             btReservations.Click += btReservations_Click_1;
             // 
@@ -212,10 +212,10 @@
             btClients.ImageAlign = ContentAlignment.MiddleLeft;
             btClients.Location = new Point(-5, -7);
             btClients.Name = "btClients";
-            btClients.Padding = new Padding(50, 0, 45, 0);
+            btClients.Padding = new Padding(30, 0, 45, 0);
             btClients.Size = new Size(248, 74);
             btClients.TabIndex = 6;
-            btClients.Text = "Clientes";
+            btClients.Text = "    Clients";
             btClients.UseVisualStyleBackColor = false;
             btClients.Click += btClients_Click_1;
             // 
@@ -223,7 +223,7 @@
             // 
             panel4.BackColor = Color.FromArgb(40, 196, 220);
             panel4.Controls.Add(btSettings);
-            panel4.Location = new Point(3, 57);
+            panel4.Location = new Point(3, 165);
             panel4.Name = "panel4";
             panel4.Size = new Size(233, 48);
             panel4.TabIndex = 9;
@@ -240,7 +240,7 @@
             btSettings.Padding = new Padding(30, 0, 45, 0);
             btSettings.Size = new Size(243, 64);
             btSettings.TabIndex = 6;
-            btSettings.Text = "    Definições";
+            btSettings.Text = "    Settings";
             btSettings.UseVisualStyleBackColor = false;
             // 
             // panel6
@@ -264,14 +264,14 @@
             btLogOut.Padding = new Padding(30, 0, 45, 0);
             btLogOut.Size = new Size(243, 64);
             btLogOut.TabIndex = 6;
-            btLogOut.Text = "    Sair";
+            btLogOut.Text = "    Logout";
             btLogOut.UseVisualStyleBackColor = false;
             // 
             // panel7
             // 
             panel7.BackColor = Color.FromArgb(40, 196, 220);
             panel7.Controls.Add(btAbout);
-            panel7.Location = new Point(3, 165);
+            panel7.Location = new Point(3, 57);
             panel7.Name = "panel7";
             panel7.Size = new Size(233, 48);
             panel7.TabIndex = 11;
@@ -288,7 +288,7 @@
             btAbout.Padding = new Padding(30, 0, 45, 0);
             btAbout.Size = new Size(243, 64);
             btAbout.TabIndex = 6;
-            btAbout.Text = "    Sobre";
+            btAbout.Text = "    About";
             btAbout.UseVisualStyleBackColor = false;
             // 
             // menuTransition
