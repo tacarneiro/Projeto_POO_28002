@@ -1,12 +1,13 @@
 namespace Trabalho_POO
 {
-    public partial class Form1 : Form
+    public partial class Main : Form
     {
         Reservations reservations;
         Clients clients;
         Login login;
+        New create;
 
-        public Form1()
+        public Main()
         {
             InitializeComponent();
         }
@@ -16,8 +17,14 @@ namespace Trabalho_POO
             HideSideBar();
         }
 
+        #region Login Page
         private void HideSideBar()
         {
+            if (create != null)
+            {
+                create.Close();
+            }
+
             sideBar.Visible = false;
             btSideBar.Visible = false;
 
@@ -25,10 +32,18 @@ namespace Trabalho_POO
             {
                 login = new Login();
                 login.FormClosed += Login_FormClosed;
+                login.OnLoginSuccess += Login_OnLoginSuccess;
+                login.OnCreateAccount += Login_OnCreateAccount;
                 login.MdiParent = this;
                 login.Dock = DockStyle.Fill;
                 login.Show();
             }
+        }
+
+        private void Login_OnLoginSuccess()
+        {
+            sideBar.Visible = true;
+            btSideBar.Visible = true;
         }
 
         private void Login_FormClosed(object? sender, FormClosedEventArgs e)
@@ -36,6 +51,39 @@ namespace Trabalho_POO
             login = null;
         }
 
+        private void Create_FormClosed(object? sender, FormClosedEventArgs e)
+        {
+            create = null;
+        }
+        #endregion
+
+        #region Create Page
+        private void Login_OnCreateAccount()
+        {
+            if (create == null)
+            {
+                create = new New();
+                create.FormClosed += Create_FormClosed;
+                create.OnCreateSuccess += Create_OnCreateSuccess;
+                create.OnCreateCancel += Create_OnCreateCancel;
+                create.MdiParent = this;
+                create.Dock = DockStyle.Fill;
+                create.Show();
+            }
+        }
+
+        private void Create_OnCreateCancel()
+        {
+            HideSideBar();
+        }
+
+        private void Create_OnCreateSuccess()
+        {
+            HideSideBar();
+        }
+        #endregion
+
+        #region Menu Controllers
         bool menuExpand = false;
         private void menuTransition_Tick(object sender, EventArgs e)
         {
@@ -133,5 +181,6 @@ namespace Trabalho_POO
         {
             clients = null;
         }
+        #endregion
     }
 }
