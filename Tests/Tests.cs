@@ -1,22 +1,34 @@
 using Dados;
 using Excecoes;
+using Newtonsoft.Json.Bson;
+using Objects;
 
 namespace Tests
 {
     [TestClass]
     public class Tests
     {
+        private List<User> users = new List<User>();
+        private User user = null;
+
+        [TestInitialize]
+        public void Setup()
+        {
+            user = new User(Guid.NewGuid(), "Teste", "teste@gmail.com", new DateTime(2004,2,11), "teste123", "Client");
+        }
+
         [TestMethod]
         public void LoadUsersTest()
         {
-            bool result = true;
-            Users.LoadUsers(out string error);
+            bool result = Users.LoadUsers(out users);
 
-            if (error != null)
-            {
-                result = false;
-            }
+            Assert.IsTrue(result);
+        }
 
+        [TestMethod]
+        public void AddUsersTest()
+        {
+            bool result = Users.AddUser(user);
 
             Assert.IsTrue(result);
         }
