@@ -37,9 +37,9 @@
             label5 = new Label();
             tbName = new TextBox();
             label6 = new Label();
-            tbBirthDate = new TextBox();
             tBoxPassword = new TextBox();
             btBack = new PictureBox();
+            mbBirthDate = new MaskedTextBox();
             ((System.ComponentModel.ISupportInitialize)btBack).BeginInit();
             SuspendLayout();
             // 
@@ -131,17 +131,6 @@
             label6.TabIndex = 28;
             label6.Text = "Name";
             // 
-            // tbBirthDate
-            // 
-            tbBirthDate.BackColor = Color.FromArgb(40, 196, 220);
-            tbBirthDate.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            tbBirthDate.ForeColor = Color.White;
-            tbBirthDate.Location = new Point(794, 264);
-            tbBirthDate.MaxLength = 10;
-            tbBirthDate.Name = "tbBirthDate";
-            tbBirthDate.Size = new Size(273, 29);
-            tbBirthDate.TabIndex = 30;
-            // 
             // tBoxPassword
             // 
             tBoxPassword.BackColor = Color.FromArgb(40, 196, 220);
@@ -165,15 +154,27 @@
             btBack.TabStop = false;
             btBack.Click += btBack_Click;
             // 
+            // mbBirthDate
+            // 
+            mbBirthDate.BackColor = Color.FromArgb(40, 196, 220);
+            mbBirthDate.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            mbBirthDate.ForeColor = Color.White;
+            mbBirthDate.Location = new Point(794, 264);
+            mbBirthDate.Mask = "00/00/0000";
+            mbBirthDate.Name = "mbBirthDate";
+            mbBirthDate.Size = new Size(273, 29);
+            mbBirthDate.TabIndex = 33;
+            mbBirthDate.ValidatingType = typeof(DateTime);
+            // 
             // New
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(40, 196, 220);
             ClientSize = new Size(1232, 723);
+            Controls.Add(mbBirthDate);
             Controls.Add(btBack);
             Controls.Add(tBoxPassword);
-            Controls.Add(tbBirthDate);
             Controls.Add(tbName);
             Controls.Add(label6);
             Controls.Add(label4);
@@ -204,8 +205,8 @@
         private Label label5;
         private TextBox tbName;
         private Label label6;
-        private TextBox tbBirthDate;
         private TextBox tBoxPassword;
         private PictureBox btBack;
+        private MaskedTextBox mbBirthDate;
     }
 }

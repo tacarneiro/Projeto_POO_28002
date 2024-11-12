@@ -15,17 +15,27 @@ public class User
     #region CONSTRUTORES
     public User(Guid id, string name, string email, DateTime dataNascimento, string password, string role)
     {
-        try {
-            Id = id;
+        try
+        {
             ValidateFields(name, email, dataNascimento, password, role);
+
+            if (dataNascimento > DateTime.Now)
+                throw new InvalidDateException();
+
+            Id = id;
             Name = name;
             Email = email;
             DataNascimento = dataNascimento;
             Password = password;
             Role = role;
         }
-        catch { 
-        
+        catch (NullArgumentException ex)
+        {
+            throw new Exception(ex.Message);
+        }
+        catch (InvalidDateException ex)
+        {
+            throw new Exception(ex.Message);
         }
     }
 

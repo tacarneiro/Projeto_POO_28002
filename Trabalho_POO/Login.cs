@@ -1,6 +1,7 @@
 ﻿using Dados;
 using Objects;
 using static Excecoes.Excecoes;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Trabalho_POO
 {
@@ -18,11 +19,13 @@ namespace Trabalho_POO
         #region Load Users
         private void Login_Load(object sender, EventArgs e)
         {
-            users = Users.LoadUsers(out string error);
-
-            if (error != null)
+            try
             {
-                
+                Users.LoadUsers(out users);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         #endregion

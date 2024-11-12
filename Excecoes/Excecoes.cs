@@ -29,6 +29,13 @@
         }
         #endregion
 
+        #region Invalid Date
+        public class InvalidDateException : Exception
+        {
+            public InvalidDateException() : base("Data inválida!") { }
+        }
+        #endregion
+
         #region User Not Found
         public class UserNotFoundException: Exception
         {

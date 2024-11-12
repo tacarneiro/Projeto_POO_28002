@@ -8,6 +8,8 @@ using Excecoes;
 using Objects;
 using static Excecoes.Excecoes;
 using System.Configuration;
+using System.Data;
+using System.Xml.Linq;
 
 namespace Dados
 {
@@ -23,6 +25,10 @@ namespace Dados
 
         #region PROPRIEDADES
 
+        public static List<User> GetUsers()
+        {
+            return users;
+        }
         #endregion
 
         #region OUTROS MÉTODOS
@@ -30,18 +36,16 @@ namespace Dados
         /// Load User Function
         /// </summary>
         /// 
-        public static List<User>? LoadUsers(out string errorMessage)
+        public static bool LoadUsers(out List<User> users)
         {
             string filePath = "C:\\Projeto_POO_28002-dev\\Projeto_POO_28002-dev\\Trabalho_POO\\Bd\\Users.txt";
-            var users = new List<User>();
-            errorMessage = null;
+            users = new List<User>();
 
             try
             {
                 if (!File.Exists(filePath))
-                {
                     throw new FileNotFound();
-                }
+                
 
                 var lines = File.ReadAllLines(filePath);
 
@@ -50,24 +54,21 @@ namespace Dados
                     var parts = line.Split(',');
 
                     if (parts.Length != 6)
-                    {
                         throw new InvalidLineFormatException();
-                    }
+                    
 
                     Guid id;
                     if (!Guid.TryParse(parts[0], out id))
-                    {
                         throw new InvalidGuidException("Formato de ID inválido.");
-                    }
+                    
 
                     string name = parts[1],
                            email = parts[2];
 
                     DateTime dataNascimento;
                     if (!DateTime.TryParseExact(parts[3], "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out dataNascimento))
-                    {
                         throw new InvalidDateFormatException();
-                    }
+                    
 
                     string password = parts[4],
                            role = parts[5];
@@ -76,38 +77,91 @@ namespace Dados
                     users.Add(user);
                 }
 
-                return users;
+                return true;
             }
             catch (FileNotFound ex)
             {
-                errorMessage = ex.Message;
-                return null;
+                throw new Exception(ex.Message);
             }
             catch (InvalidLineFormatException ex)
             {
-                errorMessage = ex.Message;
-                return null;
+                throw new Exception(ex.Message);
             }
             catch (InvalidDateFormatException ex)
             {
-                errorMessage = ex.Message;
-                return null;
+                throw new Exception(ex.Message);
             }
             catch (InvalidGuidException ex)
             {
-                errorMessage = ex.Message;
-                return null;
+                throw new Exception(ex.Message);
             }
             catch (NullArgumentException ex)
             {
-                errorMessage = ex.Message;
-                return null;
+                throw new Exception(ex.Message);
             }
             catch (Exception ex)
             {
-                errorMessage = ex.Message;
-                return null;
+                throw new Exception(ex.Message);
             }
+        }
+
+        /// <summary>
+        /// Add User Function
+        /// </summary>
+        /// 
+        public static bool AddUser(User user)
+        {
+            string filePath = "C:\\Projeto_POO_28002-dev\\Projeto_POO_28002-dev\\Trabalho_POO\\Bd\\Users.txt";
+
+            try
+            {
+                if (!File.Exists(filePath))
+                    throw new FileNotFound();
+
+                if (!ValidateUserExists(user.Email))
+                {
+                    string userData = $"{user.Id},{user.Name},{user.Email},{user.DataNascimento},{user.Password},{user.Role}";
+                    File.AppendAllText(filePath, userData + Environment.NewLine);
+                    users.Add(user);
+
+                    return true;
+                }
+                else
+                {
+                    throw new UserExistsException("Já existe um user com este email.");
+                }
+            }
+            catch(UserExistsException ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            catch (FileNotFound ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Validate User Exists Function
+        /// </summary>
+        /// 
+        public static bool ValidateUserExists(string email)
+        {
+            if (users.Count > 0)
+            {
+                foreach (User user in users)
+                {
+                    if (user.Email == email)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
         #endregion
     }
