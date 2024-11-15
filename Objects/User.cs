@@ -3,7 +3,7 @@ namespace Objects;
 
 public class User
 {
-    #region ATRIBUTOS
+    #region Attributes
     public Guid Id { get; private set; }
     public string Name { get; private set; }
     public string Email { get; private set; }
@@ -12,36 +12,29 @@ public class User
     public string Role { get; private set; }
     #endregion
 
-    #region CONSTRUTORES
+    #region Properties
+
+    #endregion
+
+    #region Constructor
     public User(Guid id, string name, string email, DateTime dataNascimento, string password, string role)
     {
-        try
-        {
-            ValidateFields(name, email, dataNascimento, password, role);
+        ValidateFields(name, email, dataNascimento, password, role);
 
-            if (dataNascimento > DateTime.Now)
-                throw new InvalidDateException();
+        if (dataNascimento > DateTime.Now)
+            throw new InvalidDateException();
 
-            Id = id;
-            Name = name;
-            Email = email;
-            DataNascimento = dataNascimento;
-            Password = password;
-            Role = role;
-        }
-        catch (NullArgumentException ex)
-        {
-            throw new Exception(ex.Message);
-        }
-        catch (InvalidDateException ex)
-        {
-            throw new Exception(ex.Message);
-        }
+        Id = id;
+        Name = name;
+        Email = email;
+        DataNascimento = dataNascimento;
+        Password = password;
+        Role = role;
     }
 
     #endregion
 
-    #region OUTROS MÉTODOS
+    #region Methods
     private static void ValidateFields(string name, string email, DateTime dataNascimento, string password, string role)
     {
         if (string.IsNullOrWhiteSpace(name))
