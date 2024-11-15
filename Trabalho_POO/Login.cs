@@ -1,7 +1,6 @@
 ﻿using Dados;
 using Objects;
 using static Excecoes.Excecoes;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Trabalho_POO
 {
@@ -34,44 +33,39 @@ namespace Trabalho_POO
         private void btLogin_Click(object sender, EventArgs e)
         {
             string email = tbEmail.Text.Trim(),
-                   password = tbPassword.Text;
+                   password = tbPassword.Text.Trim();
 
             try
             {
                 ValidateFields(email, password);
 
-                User user = users.Find(user => user.Email.Equals(email, StringComparison.OrdinalIgnoreCase));
+                User user = users.Find(u => string.Equals(u.Email, email, StringComparison.OrdinalIgnoreCase));
 
                 if (user == null)
                 {
-                    throw new UserNotFoundException();
+                    MessageBox.Show("Usuário não encontrado.", "Erro de Login", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
                 }
 
                 if (user.Password != password)
                 {
-                    throw new WrongPasswordException();
+                    MessageBox.Show("Senha incorreta.", "Erro de Login", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
                 }
 
                 OnLoginSuccess?.Invoke();
                 this.Close();
             }
-            catch (NullArgumentException ex)
+            catch (ArgumentNullException ex)
             {
-                MessageBox.Show(ex.Message, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-            catch (UserNotFoundException ex)
-            {
-                MessageBox.Show(ex.Message, "Erro de Login", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            catch (WrongPasswordException ex)
-            {
-                MessageBox.Show(ex.Message, "Erro de Login", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Por favor, preencha todos os campos obrigatórios.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Erro inesperado: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Erro inesperado: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
 
         private void ValidateFields(string email, string password)
         {

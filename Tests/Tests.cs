@@ -1,6 +1,4 @@
 using Dados;
-using Excecoes;
-using Newtonsoft.Json.Bson;
 using Objects;
 
 namespace Tests
@@ -10,11 +8,28 @@ namespace Tests
     {
         private List<User> users = new List<User>();
         private User user = null;
+        private Accommodations accommodation = null;
 
         [TestInitialize]
         public void Setup()
         {
-            user = new User(Guid.NewGuid(), "Teste", "teste@gmail.com", new DateTime(2004,2,11), "teste123", "Client");
+            user = new User(
+                id: Guid.NewGuid(), 
+                name: "Teste", 
+                email: "teste@gmail.com", 
+                dataNascimento: new DateTime(2004,2,11), 
+                password: "teste123", 
+                role: "Client"
+            );
+            
+            
+           accommodation = new Accommodations( 
+                name: "Beachside Villa",
+                type: "Villa",
+                location: "Miami Beach",
+                price: 250.00m,
+                capacity: 6
+            );
         }
 
         [TestMethod]
@@ -31,6 +46,36 @@ namespace Tests
             bool result = Users.AddUser(user);
 
             Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void UpdateUsersTeste()
+        {
+            // Fazer
+        }
+
+        [TestMethod]
+        public void RemoveUsersTeste()
+        {
+            // Fazer
+        }
+
+        [TestMethod]
+        public void CreateReservation()
+        {
+            // Fazer
+        }
+
+        [TestMethod]
+        public void LoadAccommodation()
+        {
+            // Fazer
+        }
+
+        [TestMethod]
+        public void CreateAccomodation()
+        {
+            // Fazer
         }
     }
 }
