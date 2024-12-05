@@ -2,7 +2,7 @@
 
 namespace Objects
 {
-    public class Accommodations
+    public class Accommodation
     {
         #region Attributes
         public Guid AccommodationID { get; private set; }
@@ -15,17 +15,17 @@ namespace Objects
         #endregion
 
         #region Constructor
-        public Accommodations(string name, string type, string location, decimal price, int capacity)
+        public Accommodation(Guid id, string name, string type, string location, decimal price, int capacity, bool available)
         {
-            ValidateFields(name, type, location, price, capacity);
-
-            AccommodationID = Guid.NewGuid();
+            AccommodationID = id;
             Name = name;
             Type = type;
             Location = location;
             Price = price;
             Capacity = capacity;
-            Available = true;
+            Available = available;
+
+            ValidateFields();
         }
         #endregion
 
@@ -42,22 +42,22 @@ namespace Objects
         /// <summary>
         /// Validate fields on Constructor.
         /// </summary>
-        private static void ValidateFields(string name, string type, string location, decimal price, int capacity)
+        public void ValidateFields()
         {
-            if (string.IsNullOrWhiteSpace(name))
-                throw new ArgumentNullException(nameof(name), "Name cannot be null or empty.");
+            if (string.IsNullOrWhiteSpace(Name))
+                throw new ArgumentNullException(nameof(Name), "Name cannot be null or empty.");
 
-            if (string.IsNullOrWhiteSpace(type))
-                throw new ArgumentNullException(nameof(type), "Type cannot be null or empty.");
+            if (string.IsNullOrWhiteSpace(Type))
+                throw new ArgumentNullException(nameof(Type), "Type cannot be null or empty.");
 
-            if (string.IsNullOrWhiteSpace(location))
-                throw new ArgumentNullException(nameof(location), "Location cannot be null or empty.");
+            if (string.IsNullOrWhiteSpace(Location))
+                throw new ArgumentNullException(nameof(Location), "Location cannot be null or empty.");
 
-            if (price <= 0)
-                throw new ArgumentException("Price per night must be greater than zero.", nameof(price));
+            if (Price <= 0)
+                throw new ArgumentException("Price must be greater than zero.", nameof(Price));
 
-            if (capacity <= 0)
-                throw new ArgumentException("Capacity must be greater than zero.", nameof(capacity));
+            if (Capacity <= 0)
+                throw new ArgumentException("Capacity must be greater than zero.", nameof(Capacity));
         }
 
         #endregion

@@ -1,1 +1,2 @@
 b3dc64ef-f429-4c06-adab-28dab2e9935b,Tiago Carneiro,tiagoacarneiro04@gmail.com,11/02/2004 00:00:00,teste123,Client
+9dc78286-25c1-4308-990a-4cffe93a1f03,Teste,teste@gmail.com,2004-02-11,teste123,Client

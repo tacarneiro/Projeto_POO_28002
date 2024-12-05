@@ -5,10 +5,11 @@ public class Reservation
 {
     #region Attributes
     public Guid ReservationID { get; private set; }
-    public User ClientID { get; set; }
-    //public Accommodation Accommodation { get; set; }
-    public DateTime CheckInDate { get; set; }
-    public DateTime CheckOutDate { get; set; }
+    public Guid ClientID { get; private set; }
+    public Guid AccommodationID { get; private set; }
+    public DateTime CheckInDate { get; private set; }
+    public DateTime CheckOutDate { get; private set; }
+    public decimal TotalPrice { get; private set; }
     public string ReservationStatus { get; private set; }
     #endregion
 
@@ -17,24 +18,17 @@ public class Reservation
     #endregion
 
     #region Constructor
-    public Reservation(User clientID, DateTime checkInDate, DateTime checkOutDate)
+    public Reservation(Guid id, Guid clientId, Guid accommodationId, DateTime checkInDate, DateTime checkOutDate, decimal totalPrice, string status)
     {
-        try
-        {
-            if (CheckInDate >= CheckOutDate)
-                throw new ArgumentException("Check-out date must be later than check-in date.");
+        ReservationID = id;
+        ClientID = clientId;
+        AccommodationID = accommodationId;
+        CheckInDate = checkInDate;
+        CheckOutDate = checkOutDate;
+        TotalPrice = totalPrice;
+        ReservationStatus = status;
 
-            ReservationID = Guid.NewGuid();
-            ClientID = clientID;
-            //AccommodationID = 
-            CheckInDate = checkInDate;
-            CheckOutDate = checkOutDate;
-            ReservationStatus = "Pending";
-        }
-        catch (NullArgumentException ex)
-        {
-            throw new Exception(ex.Message);
-        }
+        ValidateFields();
     }
     #endregion
 
@@ -67,13 +61,22 @@ public class Reservation
     /// <summary>
     /// Validates the reservation by checking that the client and dates are valid.
     /// </summary>
-    public void ValidateReservation()
+    public void ValidateFields()
     {
-        if (ClientID == null)
-            throw new NullArgumentException("Client cannot be null.");
+        if (ClientID == Guid.Empty)
+            throw new ArgumentNullException(nameof(ClientID), "Client ID cannot be empty.");
+
+        if (AccommodationID == Guid.Empty)
+            throw new ArgumentNullException(nameof(AccommodationID), "Accommodation ID cannot be empty.");
 
         if (CheckInDate < DateTime.Today)
-            throw new InvalidDateException("Check-in date cannot be earlier than today.");
+            throw new ArgumentException("Check-in date cannot be in the past.");
+
+        if (CheckOutDate <= CheckInDate)
+            throw new ArgumentException("Check-out date must be after the check-in date.");
+
+        if (TotalPrice <= 0)
+            throw new ArgumentException("Total price must be greater than zero.");
     }
     #endregion
 }
