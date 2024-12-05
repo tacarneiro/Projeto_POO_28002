@@ -12,6 +12,7 @@ namespace Dados
         /// 
         #region Attributes
         private static List<User> users = new List<User>();
+        private const string filePath = "C:\\Projeto_POO_28002-dev\\Projeto_POO_28002-dev\\Trabalho_POO\\Bd\\Users.txt";
         #endregion
 
         #region Properties
@@ -28,7 +29,6 @@ namespace Dados
         /// 
         public static bool LoadUsers(out List<User> users)
         {
-            string filePath = "C:\\Projeto_POO_28002-dev\\Projeto_POO_28002-dev\\Trabalho_POO\\Bd\\Users.txt";
             users = new List<User>();
 
             try
@@ -72,12 +72,14 @@ namespace Dados
             if (!DateTime.TryParseExact(parts[3], "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime dataNascimento))
                 return null;
 
-            var name = parts[1];
-            var email = parts[2];
-            var password = parts[4];
-            var role = parts[5];
-
-            return new User(id, name, email, dataNascimento, password, role);
+            return new User(
+                id: id, 
+                name: parts[1], 
+                email: parts[2], 
+                dataNascimento: dataNascimento, 
+                password: parts[4], 
+                role: parts[5]
+            );
         }
 
         /// <summary>
@@ -86,8 +88,6 @@ namespace Dados
         /// 
         public static bool AddUser(User user)
         {
-            string filePath = "C:\\Projeto_POO_28002-dev\\Projeto_POO_28002-dev\\Trabalho_POO\\Bd\\Users.txt";
-
             try
             {
                 if (!File.Exists(filePath))
