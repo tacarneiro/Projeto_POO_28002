@@ -128,7 +128,7 @@ namespace Dados
         {
             var parts = line.Split(',');
 
-            if (parts.Length != 7)
+            if (parts.Length != 8)
                 throw new InvalidOperationException("Invalid accommodation data format.");
 
             if (!decimal.TryParse(parts[4], NumberStyles.Any, CultureInfo.InvariantCulture, out decimal pricePerNight))
@@ -147,7 +147,8 @@ namespace Dados
                 parts[3],
                 pricePerNight,
                 capacity,
-                isAvailable
+                isAvailable,
+                parts[7]
             );
         }
 

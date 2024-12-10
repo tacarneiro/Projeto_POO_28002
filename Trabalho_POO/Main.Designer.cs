@@ -42,12 +42,12 @@
             btReservations = new Button();
             panel5 = new Panel();
             btClients = new Button();
-            panel4 = new Panel();
-            btSettings = new Button();
-            panel6 = new Panel();
-            btLogOut = new Button();
             panel7 = new Panel();
             btAbout = new Button();
+            panel6 = new Panel();
+            btLogOut = new Button();
+            panel4 = new Panel();
+            btSettings = new Button();
             menuTransition = new System.Windows.Forms.Timer(components);
             sideBarTransition = new System.Windows.Forms.Timer(components);
             ((System.ComponentModel.ISupportInitialize)btSideBar).BeginInit();
@@ -57,9 +57,9 @@
             panel1.SuspendLayout();
             panel3.SuspendLayout();
             panel5.SuspendLayout();
-            panel4.SuspendLayout();
-            panel6.SuspendLayout();
             panel7.SuspendLayout();
+            panel6.SuspendLayout();
+            panel4.SuspendLayout();
             SuspendLayout();
             // 
             // nightControlBox1
@@ -219,29 +219,29 @@
             btClients.UseVisualStyleBackColor = false;
             btClients.Click += btClients_Click_1;
             // 
-            // panel4
+            // panel7
             // 
-            panel4.BackColor = Color.FromArgb(40, 196, 220);
-            panel4.Controls.Add(btSettings);
-            panel4.Location = new Point(3, 165);
-            panel4.Name = "panel4";
-            panel4.Size = new Size(233, 48);
-            panel4.TabIndex = 9;
+            panel7.BackColor = Color.FromArgb(40, 196, 220);
+            panel7.Controls.Add(btAbout);
+            panel7.Location = new Point(3, 57);
+            panel7.Name = "panel7";
+            panel7.Size = new Size(233, 48);
+            panel7.TabIndex = 11;
             // 
-            // btSettings
+            // btAbout
             // 
-            btSettings.BackColor = Color.FromArgb(40, 196, 220);
-            btSettings.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btSettings.ForeColor = Color.White;
-            btSettings.Image = (Image)resources.GetObject("btSettings.Image");
-            btSettings.ImageAlign = ContentAlignment.MiddleLeft;
-            btSettings.Location = new Point(-5, -7);
-            btSettings.Name = "btSettings";
-            btSettings.Padding = new Padding(30, 0, 45, 0);
-            btSettings.Size = new Size(243, 64);
-            btSettings.TabIndex = 6;
-            btSettings.Text = "    Settings";
-            btSettings.UseVisualStyleBackColor = false;
+            btAbout.BackColor = Color.FromArgb(40, 196, 220);
+            btAbout.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btAbout.ForeColor = Color.White;
+            btAbout.Image = (Image)resources.GetObject("btAbout.Image");
+            btAbout.ImageAlign = ContentAlignment.MiddleLeft;
+            btAbout.Location = new Point(-5, -7);
+            btAbout.Name = "btAbout";
+            btAbout.Padding = new Padding(30, 0, 45, 0);
+            btAbout.Size = new Size(243, 64);
+            btAbout.TabIndex = 6;
+            btAbout.Text = "    About";
+            btAbout.UseVisualStyleBackColor = false;
             // 
             // panel6
             // 
@@ -267,29 +267,29 @@
             btLogOut.Text = "    Logout";
             btLogOut.UseVisualStyleBackColor = false;
             // 
-            // panel7
+            // panel4
             // 
-            panel7.BackColor = Color.FromArgb(40, 196, 220);
-            panel7.Controls.Add(btAbout);
-            panel7.Location = new Point(3, 57);
-            panel7.Name = "panel7";
-            panel7.Size = new Size(233, 48);
-            panel7.TabIndex = 11;
+            panel4.BackColor = Color.FromArgb(40, 196, 220);
+            panel4.Controls.Add(btSettings);
+            panel4.Location = new Point(3, 165);
+            panel4.Name = "panel4";
+            panel4.Size = new Size(233, 48);
+            panel4.TabIndex = 9;
             // 
-            // btAbout
+            // btSettings
             // 
-            btAbout.BackColor = Color.FromArgb(40, 196, 220);
-            btAbout.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btAbout.ForeColor = Color.White;
-            btAbout.Image = (Image)resources.GetObject("btAbout.Image");
-            btAbout.ImageAlign = ContentAlignment.MiddleLeft;
-            btAbout.Location = new Point(-5, -7);
-            btAbout.Name = "btAbout";
-            btAbout.Padding = new Padding(30, 0, 45, 0);
-            btAbout.Size = new Size(243, 64);
-            btAbout.TabIndex = 6;
-            btAbout.Text = "    About";
-            btAbout.UseVisualStyleBackColor = false;
+            btSettings.BackColor = Color.FromArgb(40, 196, 220);
+            btSettings.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btSettings.ForeColor = Color.White;
+            btSettings.Image = (Image)resources.GetObject("btSettings.Image");
+            btSettings.ImageAlign = ContentAlignment.MiddleLeft;
+            btSettings.Location = new Point(-5, -7);
+            btSettings.Name = "btSettings";
+            btSettings.Padding = new Padding(30, 0, 45, 0);
+            btSettings.Size = new Size(243, 64);
+            btSettings.TabIndex = 6;
+            btSettings.Text = "    Settings";
+            btSettings.UseVisualStyleBackColor = false;
             // 
             // menuTransition
             // 
@@ -300,7 +300,7 @@
             sideBarTransition.Interval = 10;
             sideBarTransition.Tick += sideBarTransition_Tick;
             // 
-            // Form1
+            // Main
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -309,7 +309,7 @@
             Controls.Add(panel2);
             FormBorderStyle = FormBorderStyle.None;
             IsMdiContainer = true;
-            Name = "Form1";
+            Name = "Main";
             Text = "Form1";
             Load += Form1_Load;
             ((System.ComponentModel.ISupportInitialize)btSideBar).EndInit();
@@ -320,9 +320,9 @@
             panel1.ResumeLayout(false);
             panel3.ResumeLayout(false);
             panel5.ResumeLayout(false);
-            panel4.ResumeLayout(false);
-            panel6.ResumeLayout(false);
             panel7.ResumeLayout(false);
+            panel6.ResumeLayout(false);
+            panel4.ResumeLayout(false);
             ResumeLayout(false);
         }
 

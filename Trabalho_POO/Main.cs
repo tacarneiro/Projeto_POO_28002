@@ -1,3 +1,6 @@
+using Dados;
+using Objects;
+
 namespace Trabalho_POO
 {
     public partial class Main : Form
@@ -6,6 +9,7 @@ namespace Trabalho_POO
         Clients clients;
         Login login;
         New create;
+        Accommodations accommodations;
 
         public Main()
         {
@@ -44,6 +48,17 @@ namespace Trabalho_POO
         {
             sideBar.Visible = true;
             btSideBar.Visible = true;
+
+            accommodations = new Accommodations();
+            accommodations.FormClosed += Accommodations_FormClosed;
+            accommodations.MdiParent = this;
+            accommodations.Dock = DockStyle.Fill;
+            accommodations.Show();
+        }
+
+        private void Accommodations_FormClosed(object? sender, FormClosedEventArgs e)
+        {
+
         }
 
         private void Login_FormClosed(object? sender, FormClosedEventArgs e)
@@ -166,7 +181,7 @@ namespace Trabalho_POO
             if (clients == null)
             {
                 clients = new Clients();
-                clients.FormClosed += Clients_FormClosed; ;
+                clients.FormClosed += Clients_FormClosed;
                 clients.MdiParent = this;
                 clients.Dock = DockStyle.Fill;
                 clients.Show();

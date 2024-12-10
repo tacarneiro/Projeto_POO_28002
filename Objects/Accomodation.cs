@@ -12,10 +12,12 @@ namespace Objects
         public decimal Price { get; set; }
         public int Capacity { get; set; }
         public bool Available { get; private set; }
+
+        public string Image { get; private set; }
         #endregion
 
         #region Constructor
-        public Accommodation(Guid id, string name, string type, string location, decimal price, int capacity, bool available)
+        public Accommodation(Guid id, string name, string type, string location, decimal price, int capacity, bool available, string image)
         {
             AccommodationID = id;
             Name = name;
@@ -24,6 +26,7 @@ namespace Objects
             Price = price;
             Capacity = capacity;
             Available = available;
+            Image = image;
 
             ValidateFields();
         }

@@ -1,5 +1,6 @@
 using Dados;
 using Objects;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Tests
 {
@@ -30,7 +31,8 @@ namespace Tests
                 location: "Miami Beach",
                 price: 250.00m,
                 capacity: 6,
-                available: true
+                available: true,
+                image: ""
             );
 
             reservation = new Reservation(
@@ -44,7 +46,7 @@ namespace Tests
             );
         }
 
-        [TestMethod]
+        [TestMethod, Priority(1)]
         public void LoadUsersTest()
         {
             bool result = Users.LoadUsers(out users);
@@ -52,7 +54,7 @@ namespace Tests
             Assert.IsTrue(result);
         }
 
-        [TestMethod]
+        [TestMethod, Priority(2)]
         public void AddUsersTest()
         {
             bool result = Users.AddUser(user);
@@ -60,7 +62,7 @@ namespace Tests
             Assert.IsTrue(result);
         }
 
-        [TestMethod]
+        [TestMethod, Priority(3)]
         public void UpdateUsersTest()
         {
             // Fazer
@@ -76,7 +78,7 @@ namespace Tests
         }
 
 
-        [TestMethod]
+        [TestMethod, Priority(1)]
         public void LoadReservationsTest()
         {
             var loadedReservations = Reservations.LoadReservations();
@@ -84,7 +86,7 @@ namespace Tests
             Assert.IsTrue(loadedReservations.Contains(reservation));
         }
 
-        [TestMethod]
+        [TestMethod, Priority(2)]
         public void CreateReservationTest()
         {
             bool result = Reservations.AddReservation(reservation);
@@ -94,7 +96,7 @@ namespace Tests
             Assert.IsNotNull(retrievedReservation);
         }
 
-        [TestMethod]
+        [TestMethod, Priority(3)]
         public void CancelReservationTest()
         {
             Reservations.CancelReservation(reservation.ReservationID);
@@ -104,14 +106,14 @@ namespace Tests
         }
 
 
-        [TestMethod]
+        [TestMethod, Priority(1)]
         public void LoadAccommodationsTest()
         {
             var loadedAccommodations = Accommodations.LoadAccomodations();
             Assert.IsTrue(loadedAccommodations.Any());
         }
 
-        [TestMethod]
+        [TestMethod, Priority(2)]
         public void CreateAccomodationTeste()
         {
             bool result = Accommodations.AddAccommodation(accommodation);
@@ -122,7 +124,16 @@ namespace Tests
             Assert.IsNotNull(retrievedAccommodation);
         }
 
-        [TestMethod]
+        [TestMethod, Priority(3)]
+        public void UpdateAvailabilityTest()
+        {
+            Accommodations.UpdateAvailability(accommodation.AccommodationID, false);
+
+            var retrievedAccommodation = Accommodations.FindAccommodationById(accommodation.AccommodationID);
+            Assert.IsFalse(retrievedAccommodation.Available);
+        }
+
+        [TestMethod, Priority(4)]
         public void DeleteAccommodationTest()
         {
             Accommodations.DeleteAccommodation(accommodation.AccommodationID);
@@ -130,15 +141,6 @@ namespace Tests
             var result = Accommodations.GetAllAccommodations()
                 .FirstOrDefault(a => a.AccommodationID == accommodation.AccommodationID);
             Assert.IsNull(result);
-        }
-
-        [TestMethod]
-        public void UpdateAvailabilityTest()
-        {
-            Accommodations.UpdateAvailability(accommodation.AccommodationID, false);
-
-            var retrievedAccommodation = Accommodations.FindAccommodationById(accommodation.AccommodationID);
-            Assert.IsFalse(retrievedAccommodation.Available);
         }
     }
 }
