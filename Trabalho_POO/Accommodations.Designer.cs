@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             flpAccommodations = new FlowLayoutPanel();
-            button1 = new Button();
+            btCreate = new Button();
             SuspendLayout();
             // 
             // flpAccommodations
@@ -39,26 +39,27 @@
             flpAccommodations.Name = "flpAccommodations";
             flpAccommodations.Size = new Size(1122, 560);
             flpAccommodations.TabIndex = 0;
+            flpAccommodations.Paint += flpAccommodations_Paint;
             // 
-            // button1
+            // btCreate
             // 
-            button1.BackColor = Color.FromArgb(40, 196, 220);
-            button1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            button1.ForeColor = Color.White;
-            button1.Location = new Point(992, 4);
-            button1.Name = "button1";
-            button1.Size = new Size(109, 36);
-            button1.TabIndex = 1;
-            button1.Text = "Create";
-            button1.UseVisualStyleBackColor = false;
-            button1.Click += button1_Click;
+            btCreate.BackColor = Color.FromArgb(40, 196, 220);
+            btCreate.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btCreate.ForeColor = Color.White;
+            btCreate.Location = new Point(992, 4);
+            btCreate.Name = "btCreate";
+            btCreate.Size = new Size(109, 36);
+            btCreate.TabIndex = 1;
+            btCreate.Text = "Create";
+            btCreate.UseVisualStyleBackColor = false;
+            btCreate.Click += btCreate_Click;
             // 
             // Accommodations
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1122, 604);
-            Controls.Add(button1);
+            Controls.Add(btCreate);
             Controls.Add(flpAccommodations);
             FormBorderStyle = FormBorderStyle.None;
             Name = "Accommodations";
@@ -69,6 +70,6 @@
         #endregion
 
         private FlowLayoutPanel flpAccommodations;
-        private Button button1;
+        private Button btCreate;
     }
 }

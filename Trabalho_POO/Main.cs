@@ -72,7 +72,7 @@ namespace Trabalho_POO
         }
         #endregion
 
-        #region Create Page
+        #region Create User Page
         private void Login_OnCreateAccount()
         {
             if (create == null)

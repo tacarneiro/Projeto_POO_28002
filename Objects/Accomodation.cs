@@ -5,15 +5,15 @@ namespace Objects
     public class Accommodation
     {
         #region Attributes
-        public Guid AccommodationID { get; private set; }
+        public Guid AccommodationID { get; set; }
         public string Name { get; set; }
         public string Type { get; set; }
         public string Location { get; set; }
         public decimal Price { get; set; }
         public int Capacity { get; set; }
-        public bool Available { get; private set; }
+        public bool Available { get; set; }
 
-        public string Image { get; private set; }
+        public string Image { get; set; }
         #endregion
 
         #region Constructor

@@ -5,6 +5,8 @@ namespace Trabalho_POO
 {
     public partial class Accommodations : Form
     {
+        CreateAcc createacc;
+
         public Accommodations()
         {
             InitializeComponent();
@@ -18,7 +20,7 @@ namespace Trabalho_POO
             {
                 flpAccommodations.Controls.Clear();
 
-                var accommodations = Dados.Accommodations.LoadAccomodations();
+                var accommodations = Dados.Accommodations.LoadAccommodations();
 
                 foreach (var accommodation in accommodations)
                 {
@@ -131,14 +133,42 @@ namespace Trabalho_POO
             }
         }
 
-        private void EditAccommodation(Accommodation accommodation)
-        {
-
-        }
-
         #endregion
 
-        private void button1_Click(object sender, EventArgs e)
+        #region Other Functions
+        private void EditAccommodation(Accommodation accommodation)
+        {
+            if (createacc == null || createacc.IsDisposed)
+            {
+                createacc = new CreateAcc();
+                createacc.FormClosed += Createacc_FormClosed;
+                createacc.Dock = DockStyle.Fill;
+            }
+
+            createacc.SetAccommodationData(accommodation);
+
+            createacc.Show();
+        }
+
+        private void btCreate_Click(object sender, EventArgs e)
+        {
+            if (createacc == null)
+            {
+                createacc = new CreateAcc();
+                createacc.FormClosed += Createacc_FormClosed;
+                createacc.Dock = DockStyle.Fill;
+                createacc.Show();
+            }
+        }
+
+        private void Createacc_FormClosed(object? sender, FormClosedEventArgs e)
+        {
+            createacc = null;
+            LoadAccommodations();
+        }
+        #endregion
+
+        private void flpAccommodations_Paint(object sender, PaintEventArgs e)
         {
 
         }

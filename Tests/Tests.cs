@@ -109,7 +109,7 @@ namespace Tests
         [TestMethod, Priority(1)]
         public void LoadAccommodationsTest()
         {
-            var loadedAccommodations = Accommodations.LoadAccomodations();
+            var loadedAccommodations = Accommodations.LoadAccommodations();
             Assert.IsTrue(loadedAccommodations.Any());
         }
 
