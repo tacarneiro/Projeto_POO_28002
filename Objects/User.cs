@@ -1,15 +1,15 @@
 ﻿using static Excecoes.Excecoes;
 namespace Objects;
 
-public class User
+public abstract class User
 {
     #region Attributes
-    public Guid Id { get; private set; }
-    public string Name { get; private set; }
-    public string Email { get; private set; }
-    public DateTime DataNascimento { get; private set; }
-    public string Password { get; private set; }
-    public string Role { get; private set; }
+    public Guid Id { get; protected set; }
+    public string Name { get; protected set; }
+    public string Email { get; protected set; }
+    public DateTime DataNascimento { get; protected set; }
+    public string Password { get; protected set; }
+    public string Role { get; protected set; }
     #endregion
 
     #region Properties
@@ -17,13 +17,17 @@ public class User
     #endregion
 
     #region Constructor
+    /// <summary>
+    /// Initializes a new instance of the <see cref="User"/> class with the specified parameters.
+    /// </summary>
+    /// <param name="id">The unique identifier of the user.</param>
+    /// <param name="name">The name of the user.</param>
+    /// <param name="email">The email address of the user.</param>
+    /// <param name="dataNascimento">The birth date of the user.</param>
+    /// <param name="password">The password for the user.</param>
+    /// <param name="role">The role assigned to the user.</param>
     public User(Guid id, string name, string email, DateTime dataNascimento, string password, string role)
     {
-        ValidateFields(name, email, dataNascimento, password, role);
-
-        if (dataNascimento > DateTime.Now)
-            throw new InvalidDateException();
-
         Id = id;
         Name = name;
         Email = email;
@@ -31,26 +35,13 @@ public class User
         Password = password;
         Role = role;
     }
-
     #endregion
 
     #region Methods
-    private static void ValidateFields(string name, string email, DateTime dataNascimento, string password, string role)
-    {
-        if (string.IsNullOrWhiteSpace(name))
-            throw new NullArgumentException("Name");
-
-        if (string.IsNullOrWhiteSpace(email))
-            throw new NullArgumentException("Email");
-
-        if (dataNascimento == default)
-            throw new NullArgumentException("DataNascimento");
-
-        if (string.IsNullOrWhiteSpace(password))
-            throw new NullArgumentException("Password");
-
-        if (string.IsNullOrWhiteSpace(password))
-            throw new NullArgumentException("Role");
-    }
+    /// <summary>
+    /// Abstract method that should be implemented to return the user's name.
+    /// </summary>
+    /// <returns>The name of the user.</returns>
+    public abstract string GetName();
     #endregion
 }

@@ -36,7 +36,7 @@ namespace Trabalho_POO
 
             try
             {
-                bool result = Users.AddUser(new User(Guid.NewGuid(), name, email, dataNascimento, password, "Client"));
+                bool result = Users.AddUser(new Users(Guid.NewGuid(), name, email, dataNascimento, password, "Client"));
 
                 if (result)
                 {

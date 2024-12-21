@@ -28,35 +28,36 @@
         /// </summary>
         private void InitializeComponent()
         {
-            label1 = new Label();
+            dgvReservations = new DataGridView();
+            ((System.ComponentModel.ISupportInitialize)dgvReservations).BeginInit();
             SuspendLayout();
             // 
-            // label1
+            // dgvReservations
             // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 48F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.Location = new Point(1, -1);
-            label1.Name = "label1";
-            label1.Size = new Size(440, 86);
-            label1.TabIndex = 0;
-            label1.Text = "Teste Reservas";
+            dgvReservations.BackgroundColor = Color.WhiteSmoke;
+            dgvReservations.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvReservations.GridColor = Color.WhiteSmoke;
+            dgvReservations.Location = new Point(1, 117);
+            dgvReservations.Name = "dgvReservations";
+            dgvReservations.Size = new Size(1137, 525);
+            dgvReservations.TabIndex = 0;
             // 
             // Reservations
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1138, 643);
-            Controls.Add(label1);
+            Controls.Add(dgvReservations);
             FormBorderStyle = FormBorderStyle.None;
             Name = "Reservations";
             Text = "Reservations";
             Load += Reservations_Load;
+            ((System.ComponentModel.ISupportInitialize)dgvReservations).EndInit();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
 
-        private Label label1;
+        private DataGridView dgvReservations;
     }
 }

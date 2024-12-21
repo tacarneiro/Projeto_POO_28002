@@ -1,3 +1,6 @@
+using Dados;
+using Objects;
+
 namespace Trabalho_POO
 {
     public partial class Main : Form
@@ -6,6 +9,7 @@ namespace Trabalho_POO
         Clients clients;
         Login login;
         New create;
+        Accommodations accommodations;
 
         public Main()
         {
@@ -44,6 +48,17 @@ namespace Trabalho_POO
         {
             sideBar.Visible = true;
             btSideBar.Visible = true;
+
+            accommodations = new Accommodations();
+            accommodations.FormClosed += Accommodations_FormClosed;
+            accommodations.MdiParent = this;
+            accommodations.Dock = DockStyle.Fill;
+            accommodations.Show();
+        }
+
+        private void Accommodations_FormClosed(object? sender, FormClosedEventArgs e)
+        {
+
         }
 
         private void Login_FormClosed(object? sender, FormClosedEventArgs e)
@@ -57,7 +72,7 @@ namespace Trabalho_POO
         }
         #endregion
 
-        #region Create Page
+        #region Create User Page
         private void Login_OnCreateAccount()
         {
             if (create == null)
@@ -163,23 +178,23 @@ namespace Trabalho_POO
 
         private void btClients_Click_1(object sender, EventArgs e)
         {
-            if (clients == null)
+            if (accommodations == null)
             {
-                clients = new Clients();
-                clients.FormClosed += Clients_FormClosed; ;
-                clients.MdiParent = this;
-                clients.Dock = DockStyle.Fill;
-                clients.Show();
+                accommodations = new Accommodations();
+                accommodations.FormClosed += Clients_FormClosed;
+                accommodations.MdiParent = this;
+                accommodations.Dock = DockStyle.Fill;
+                accommodations.Show();
             }
             else
             {
-                clients.Activate();
+                accommodations.Activate();
             }
         }
 
         private void Clients_FormClosed(object? sender, FormClosedEventArgs e)
         {
-            clients = null;
+            accommodations = null;
         }
         #endregion
     }

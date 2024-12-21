@@ -5,54 +5,48 @@ using System.Text;
 
 namespace Dados
 {
-    public class Reservations
+    public class Reservations : Reservation
     {
-        /// <summary>
-        /// Reservations Class
-        /// </summary>
-        /// 
         #region Attributes
-        private static List<Reservation> reservations = new List<Reservation>();
+        private static List<Reservations> reservations = new List<Reservations>();
         public const string FilePath = "C:\\Projeto_POO_28002-dev\\Projeto_POO_28002-dev\\Trabalho_POO\\Bd\\Reservations.txt";
         #endregion
 
-        #region Properties
-        public static List<Reservation> GetAllReservations()
-        {
-            return reservations;
-        }
-
+        #region Constructor
         /// <summary>
-        /// Return all reservations by client ID.
+        /// Initializes a new instance of the <see cref="Reservations"/> class.
         /// </summary>
-        public static List<Reservation> GetReservationsByClient(Guid clientId)
+        /// <param name="reservationId">Unique identifier for the reservation.</param>
+        /// <param name="clientId">Unique identifier for the client making the reservation.</param>
+        /// <param name="clientName">Name of the client.</param>
+        /// <param name="accommodationId">Unique identifier for the accommodation.</param>
+        /// <param name="accommodationName">Name of the accommodation.</param>
+        /// <param name="checkInDate">Check-in date of the reservation.</param>
+        /// <param name="checkOutDate">Check-out date of the reservation.</param>
+        /// <param name="totalPrice">Total price of the reservation.</param>
+        /// <param name="reservationStatus">Status of the reservation (e.g., "Confirmed").</param>
+        /// <exception cref="InvalidOperationException">Thrown if the accommodation is not available for the selected dates.</exception>
+        public Reservations(Guid reservationId, Guid clientId, string clientName, Guid accommodationId, string accommodationName, DateTime checkInDate, DateTime checkOutDate, decimal totalPrice, string reservationStatus)
+            : base(reservationId, clientId, clientName, accommodationId, accommodationName, checkInDate, checkOutDate, totalPrice, reservationStatus)
         {
-            return reservations.Where(r => r.ClientID == clientId && r.ReservationStatus == "Confirmed").ToList();
-        }
+            if (!IsAccommodationAvailable(accommodationId, checkInDate, checkOutDate))
+            {
+                throw new InvalidOperationException("Accommodation is not available for the selected dates.");
+            }
 
-        /// <summary>
-        /// Return all reservations by accomodation ID.
-        /// </summary>
-        public static List<Reservation> GetReservationsByAccommodation(Guid accommodationId)
-        {
-            return reservations.Where(r => r.AccommodationID == accommodationId && r.ReservationStatus == "Confirmed").ToList();
-        }
-
-        /// <summary>
-        /// Finds an reservation by ID.
-        /// </summary>
-        public static Reservation FindReservationById(Guid reservationId)
-        {
-            return reservations.FirstOrDefault(r => r.ReservationID == reservationId)
-                   ?? throw new NotFoundException("Reservation not found.");
+            reservations.Add(this);
         }
         #endregion
 
         #region Methods
         /// <summary>
-        /// Adds a new reservation to the repository and saves to file.
+        /// Adds a new reservation to the repository and saves it to a file.
         /// </summary>
-        public static bool AddReservation(Reservation reservation)
+        /// <param name="reservation">The reservation object to add.</param>
+        /// <returns>True if the reservation is successfully added; otherwise, false.</returns>
+        /// <exception cref="ArgumentNullException">Thrown if the reservation is null.</exception>
+        /// <exception cref="InvalidOperationException">Thrown if the accommodation is not available for the specified dates.</exception>
+        public static bool AddReservation(Reservations reservation)
         {
             if (reservation == null)
                 throw new ArgumentNullException(nameof(reservation));
@@ -62,10 +56,7 @@ namespace Dados
 
             try
             {
-                reservation.ValidateFields();
-
                 reservations.Add(reservation);
-
                 SaveToFile();
                 return true;
             }
@@ -74,17 +65,6 @@ namespace Dados
                 Console.WriteLine($"Error adding reservation: {ex.Message}");
                 return false;
             }
-        }
-
-        /// <summary>
-        /// Cancel an reservation by ID and saves changes.
-        /// </summary>
-        public static void CancelReservation(Guid reservationId)
-        {
-            var reservation = FindReservationById(reservationId);
-            reservation.CancelReservation();
-
-            SaveToFile();
         }
 
         /// <summary>
@@ -99,6 +79,7 @@ namespace Dados
         /// <summary>
         /// Loads reservations from a text file into the repository.
         /// </summary>
+        /// <returns>A list of reservations loaded from the file.</returns>
         public static List<Reservation> LoadReservations()
         {
             var reservations = new List<Reservation>();
@@ -127,12 +108,18 @@ namespace Dados
             return reservations;
         }
 
+        /// <summary>
+        /// Builds a reservation object from a CSV line.
+        /// </summary>
+        /// <param name="line">The line containing reservation data in CSV format.</param>
+        /// <returns>A reservation object.</returns>
+        /// <exception cref="InvalidOperationException">Thrown if the data format is invalid.</exception>
         private static Reservation BuildReservation(string line)
         {
             var parts = line.Split(',');
 
-            if (parts.Length != 6)
-                throw new InvalidOperationException("Invalid reservation data format.");
+            if (parts.Length != 9)
+                throw new InvalidOperationException("Invalid reservation data format. Expected 9 columns.");
 
             if (!Guid.TryParse(parts[0], out Guid reservationId))
                 throw new InvalidOperationException("Invalid Reservation ID format.");
@@ -140,29 +127,42 @@ namespace Dados
             if (!Guid.TryParse(parts[1], out Guid clientId))
                 throw new InvalidOperationException("Invalid Client ID format.");
 
-            if (!Guid.TryParse(parts[2], out Guid accommodationId))
+            string clientName = parts[2];
+
+            if (!Guid.TryParse(parts[3], out Guid accommodationId))
                 throw new InvalidOperationException("Invalid Accommodation ID format.");
 
-            if (!DateTime.TryParseExact(parts[3], "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime checkInDate))
+            string accommodationName = parts[4];
+
+            if (!DateTime.TryParseExact(parts[5], "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime checkInDate))
                 throw new InvalidOperationException("Invalid Check-in Date format.");
 
-            if (!DateTime.TryParseExact(parts[4], "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime checkOutDate))
+            if (!DateTime.TryParseExact(parts[6], "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime checkOutDate))
                 throw new InvalidOperationException("Invalid Check-out Date format.");
 
-            if (!decimal.TryParse(parts[5], NumberStyles.Any, CultureInfo.InvariantCulture, out decimal totalPrice))
+            if (!decimal.TryParse(parts[7], NumberStyles.Any, CultureInfo.InvariantCulture, out decimal totalPrice))
                 throw new InvalidOperationException("Invalid Total Price format.");
 
-            return new Reservation(
+            return new Reservations(
                 reservationId,
                 clientId,
+                clientName,
                 accommodationId,
+                accommodationName,
                 checkInDate,
                 checkOutDate,
                 totalPrice,
-                parts[6]
+                parts[8]
             );
         }
 
+        /// <summary>
+        /// Checks if the specified accommodation is available for the given date range.
+        /// </summary>
+        /// <param name="accommodationId">ID of the accommodation to check.</param>
+        /// <param name="checkIn">Start date of the period.</param>
+        /// <param name="checkOut">End date of the period.</param>
+        /// <returns>True if the accommodation is available; otherwise, false.</returns>
         private static bool IsAccommodationAvailable(Guid accommodationId, DateTime checkIn, DateTime checkOut)
         {
             return !reservations.Any(r =>
@@ -171,6 +171,36 @@ namespace Dados
                 ((checkIn >= r.CheckInDate && checkIn < r.CheckOutDate) ||
                  (checkOut > r.CheckInDate && checkOut <= r.CheckOutDate) ||
                  (checkIn <= r.CheckInDate && checkOut >= r.CheckOutDate)));
+        }
+
+        /// <summary>
+        /// Validates the fields of the reservation.
+        /// </summary>
+        private static void ValidateFields(string clientName, string clientEmail, DateTime clientBirthDate, string clientPassword, string reservationRole)
+        {
+            if (string.IsNullOrWhiteSpace(clientName))
+                throw new NullArgumentException("Name");
+
+            if (string.IsNullOrWhiteSpace(clientEmail))
+                throw new NullArgumentException("Email");
+
+            if (clientBirthDate == default)
+                throw new NullArgumentException("DataNascimento");
+
+            if (string.IsNullOrWhiteSpace(clientPassword))
+                throw new NullArgumentException("Password");
+
+            if (string.IsNullOrWhiteSpace(reservationRole))
+                throw new NullArgumentException("Role");
+        }
+
+        /// <summary>
+        /// Gets the status of the reservation.
+        /// </summary>
+        /// <returns>The status of the reservation.</returns>
+        public override string GetStatus()
+        {
+            return ReservationStatus;
         }
         #endregion
     }

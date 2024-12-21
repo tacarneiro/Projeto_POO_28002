@@ -2,30 +2,41 @@
 
 namespace Objects
 {
-    public class Accommodation
+    public abstract class Accommodation
     {
         #region Attributes
-        public Guid AccommodationID { get; private set; }
+        public Guid AccommodationID { get; set; }
         public string Name { get; set; }
         public string Type { get; set; }
         public string Location { get; set; }
         public decimal Price { get; set; }
         public int Capacity { get; set; }
-        public bool Available { get; private set; }
+        public bool Available { get; set; }
+        public string Image { get; set; }
         #endregion
 
         #region Constructor
-        public Accommodation(Guid id, string name, string type, string location, decimal price, int capacity, bool available)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Accommodation"/> class with the specified parameters.
+        /// </summary>
+        /// <param name="id">The unique identifier of the accommodation.</param>
+        /// <param name="name">The name of the accommodation.</param>
+        /// <param name="type">The type of the accommodation (e.g., hotel, apartment, house).</param>
+        /// <param name="location">The location of the accommodation.</param>
+        /// <param name="price">The price per night for the accommodation.</param>
+        /// <param name="capacity">The maximum number of guests the accommodation can host.</param>
+        /// <param name="available">The availability status of the accommodation.</param>
+        /// <param name="image">The image URL for the accommodation.</param>
+        public Accommodation(Guid accommodationId, string name, string type, string location, decimal price, int capacity, bool available, string image)
         {
-            AccommodationID = id;
+            AccommodationID = accommodationId;
             Name = name;
             Type = type;
             Location = location;
             Price = price;
             Capacity = capacity;
             Available = available;
-
-            ValidateFields();
+            Image = image;
         }
         #endregion
 
@@ -40,26 +51,10 @@ namespace Objects
         }
 
         /// <summary>
-        /// Validate fields on Constructor.
+        /// Abstract method to get the availability status of the accommodation.
         /// </summary>
-        public void ValidateFields()
-        {
-            if (string.IsNullOrWhiteSpace(Name))
-                throw new ArgumentNullException(nameof(Name), "Name cannot be null or empty.");
-
-            if (string.IsNullOrWhiteSpace(Type))
-                throw new ArgumentNullException(nameof(Type), "Type cannot be null or empty.");
-
-            if (string.IsNullOrWhiteSpace(Location))
-                throw new ArgumentNullException(nameof(Location), "Location cannot be null or empty.");
-
-            if (Price <= 0)
-                throw new ArgumentException("Price must be greater than zero.", nameof(Price));
-
-            if (Capacity <= 0)
-                throw new ArgumentException("Capacity must be greater than zero.", nameof(Capacity));
-        }
-
+        /// <returns>Returns true if the accommodation is available, false otherwise.</returns>
+        public abstract bool GetAvailability();
         #endregion
     }
 }

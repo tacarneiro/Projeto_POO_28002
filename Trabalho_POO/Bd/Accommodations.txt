@@ -1,0 +1,2 @@
+﻿d35a971c-dbf7-4d3c-a6ab-7c9a8ddae008,Teste1,Apartamento,Fama,200,10,True,BeachsideVilla.jpeg
+804277a9-a336-4046-8477-ed5789f61e61,Teste3,Apartment,Famalicao,200,20,False,BeachsideVilla.jpeg
