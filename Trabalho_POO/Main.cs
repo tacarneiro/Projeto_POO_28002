@@ -178,23 +178,23 @@ namespace Trabalho_POO
 
         private void btClients_Click_1(object sender, EventArgs e)
         {
-            if (clients == null)
+            if (accommodations == null)
             {
-                clients = new Clients();
-                clients.FormClosed += Clients_FormClosed;
-                clients.MdiParent = this;
-                clients.Dock = DockStyle.Fill;
-                clients.Show();
+                accommodations = new Accommodations();
+                accommodations.FormClosed += Clients_FormClosed;
+                accommodations.MdiParent = this;
+                accommodations.Dock = DockStyle.Fill;
+                accommodations.Show();
             }
             else
             {
-                clients.Activate();
+                accommodations.Activate();
             }
         }
 
         private void Clients_FormClosed(object? sender, FormClosedEventArgs e)
         {
-            clients = null;
+            accommodations = null;
         }
         #endregion
     }

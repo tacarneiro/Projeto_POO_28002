@@ -7,6 +7,8 @@ namespace Trabalho_POO
     {
         CreateAcc createacc;
 
+        public bool Available { get; internal set; }
+
         public Accommodations()
         {
             InitializeComponent();
@@ -136,7 +138,7 @@ namespace Trabalho_POO
         #endregion
 
         #region Other Functions
-        private void EditAccommodation(Accommodation accommodation)
+        private void EditAccommodation(Dados.Accommodations accommodation)
         {
             if (createacc == null || createacc.IsDisposed)
             {

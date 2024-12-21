@@ -8,7 +8,7 @@ namespace Trabalho_POO
 {
     public partial class CreateAcc : Form
     {
-        private Accommodation accommodationToEdit;
+        private Dados.Accommodations accommodationToEdit;
 
         public CreateAcc()
         {
@@ -37,15 +37,15 @@ namespace Trabalho_POO
                 }
                 else
                 {
-                    var newAccommodation = new Accommodation(
-                        id: Guid.NewGuid(),
-                        name: tbName.Text.Trim(),
-                        type: tbType.Text.Trim(),
-                        location: tbLocation.Text.Trim(),
-                        price: decimal.Parse(tbPrice.Text.Trim(), CultureInfo.InvariantCulture),
-                        capacity: int.Parse(tbCapacity.Text.Trim()),
-                        available: cbAvailable.Checked,
-                        image: ""
+                    var newAccommodation = new Dados.Accommodations(
+                        Guid.NewGuid(),
+                        tbName.Text.Trim(),
+                        tbType.Text.Trim(),
+                        tbLocation.Text.Trim(),
+                        decimal.Parse(tbPrice.Text.Trim(), CultureInfo.InvariantCulture),
+                        int.Parse(tbCapacity.Text.Trim()),
+                        cbAvailable.Checked,
+                        ""
                     );
 
                     if (Dados.Accommodations.AddAccommodation(newAccommodation))
@@ -119,7 +119,7 @@ namespace Trabalho_POO
             return true;
         }
 
-        public void SetAccommodationData(Accommodation accommodation)
+        public void SetAccommodationData(Dados.Accommodations accommodation)
         {
             accommodationToEdit = accommodation;
 

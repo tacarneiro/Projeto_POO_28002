@@ -1,16 +1,18 @@
 ﻿using static Excecoes.Excecoes;
 namespace Objects;
 
-public class Reservation
+public abstract class Reservation
 {
     #region Attributes
-    public Guid ReservationID { get; private set; }
-    public Guid ClientID { get; private set; }
-    public Guid AccommodationID { get; private set; }
-    public DateTime CheckInDate { get; private set; }
-    public DateTime CheckOutDate { get; private set; }
-    public decimal TotalPrice { get; private set; }
-    public string ReservationStatus { get; private set; }
+    public Guid ReservationID { get; protected set; }
+    public Guid ClientID { get; protected set; }
+    public string ClientName { get; protected set; }
+    public Guid AccommodationID { get; protected set; }
+    public string AccommodationName { get; protected set; }
+    public DateTime CheckInDate { get; protected set; }
+    public DateTime CheckOutDate { get; protected set; }
+    public decimal TotalPrice { get; protected set; }
+    public string ReservationStatus { get; protected set; }
     #endregion
 
     #region Properties
@@ -18,66 +20,37 @@ public class Reservation
     #endregion
 
     #region Constructor
-    public Reservation(Guid id, Guid clientId, Guid accommodationId, DateTime checkInDate, DateTime checkOutDate, decimal totalPrice, string status)
+    /// <summary>
+    /// Initializes a new instance of the <see cref="Reservation"/> class with the specified parameters.
+    /// </summary>
+    /// <param name="id">The unique identifier of the reservation.</param>
+    /// <param name="clientId">The unique identifier of the client associated with the reservation.</param>
+    /// <param name="clientName">The name of the client associated with the reservation.</param>
+    /// <param name="accommodationId">The unique identifier of the accommodation associated with the reservation.</param>
+    /// <param name="accommodationName">The name of the accommodation associated with the reservation.</param>
+    /// <param name="checkInDate">The check-in date for the reservation.</param>
+    /// <param name="checkOutDate">The check-out date for the reservation.</param>
+    /// <param name="totalPrice">The total price for the reservation.</param>
+    /// <param name="status">The current status of the reservation.</param>
+    public Reservation(Guid id, Guid clientId, string clientName, Guid accommodationId, string accommodationName, DateTime checkInDate, DateTime checkOutDate, decimal totalPrice, string status)
     {
         ReservationID = id;
         ClientID = clientId;
+        ClientName = clientName;
         AccommodationID = accommodationId;
+        AccommodationName = accommodationName;
         CheckInDate = checkInDate;
         CheckOutDate = checkOutDate;
         TotalPrice = totalPrice;
         ReservationStatus = status;
-
-        ValidateFields();
     }
     #endregion
 
     #region Methods
     /// <summary>
-    /// Confirms the reservation, updating the status.
+    /// Abstract method that should be implemented to return the reservation status.
     /// </summary>
-    public void ConfirmReservation()
-    {
-        ReservationStatus = "Confirmed";
-    }
-
-    /// <summary>
-    /// Cancels the reservation, updating the status.
-    /// </summary>
-    public void CancelReservation()
-    {
-        ReservationStatus = "Canceled";
-    }
-
-    /// <summary>
-    /// Calculates the total number of days in the reservation.
-    /// </summary>
-    /// <returns>Total number of days reserved.</returns>
-    public int GetReservationTime()
-    {
-        return (CheckOutDate - CheckInDate).Days;
-    }
-
-    /// <summary>
-    /// Validates the reservation by checking that the client and dates are valid.
-    /// </summary>
-    public void ValidateFields()
-    {
-        if (ClientID == Guid.Empty)
-            throw new ArgumentNullException(nameof(ClientID), "Client ID cannot be empty.");
-
-        if (AccommodationID == Guid.Empty)
-            throw new ArgumentNullException(nameof(AccommodationID), "Accommodation ID cannot be empty.");
-
-        if (CheckInDate < DateTime.Today)
-            throw new ArgumentException("Check-in date cannot be in the past.");
-
-        if (CheckOutDate <= CheckInDate)
-            throw new ArgumentException("Check-out date must be after the check-in date.");
-
-        if (TotalPrice <= 0)
-            throw new ArgumentException("Total price must be greater than zero.");
-    }
+    /// <returns>The current status of the reservation.</returns>
+    public abstract string GetStatus();
     #endregion
 }
-
